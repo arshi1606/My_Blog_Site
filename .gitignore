@@ -1,0 +1,6 @@
+node_modules/
+studio/node_modules/
+web/node_modules/
+.next/
+.DS_Store
+.env
