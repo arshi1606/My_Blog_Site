@@ -42,9 +42,9 @@ export default async function FeaturedBlog() {
   const selectedBlog = blogs.length > 0 ? blogs[0] : null;
 
   return (
-    <main className="max-w-3xl mx-auto px-6 py-12">
+    <main className="max-w-8xl mx-auto">
       {selectedBlog ? (
-        <div className="lg:pr-[40px] xl:pr-[60px] 2xl:pr-[73px] cursor-pointer transition duration-200 border-b-theme-charcolBlue30 border-b border-solid pb-[40px] md:pb-[50px]">
+        <div className="cursor-pointer transition duration-200 border-b-theme-charcolBlue30 border-b border-solid pb-[40px] md:pb-[50px]">
           <div className="flex flex-col gap-8">
             <div className="flex items-center gap-2 text-theme-charcolBlue70 font-regular text-base lg:text-lg xl:text-xl !leading-[20px]">
               <span>
@@ -87,7 +87,7 @@ export default async function FeaturedBlog() {
               {selectedBlog.title}
             </Link>
             {selectedBlog.metadescription && (
-              <div className="[&>p]:text-theme-darkBrown [&>p]:text-base [&>p]:font-regular [&>p]:!leading-[24px] -mt-2 lg:mt-0">
+              <div className="[&>p]:text-theme-darkBrown [&>p]:text-base [&>p]:font-regular [&>p]:!leading-[24px] -mt-3 lg:mt-0">
                 <p>{selectedBlog.metadescription}</p>
               </div>
             )}

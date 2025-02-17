@@ -26,16 +26,16 @@ export default async function LatestBlogs() {
       </h2>
       <div className="space-y-[56px]">
         {firstBlogs.map((blog: any) => {
-          // Convert body to plain text if it exists, then calculate reading time.
+
           const plainText = blog.body ? toPlainText(blog.body) : "";
           const stats = plainText
             ? readingTime(plainText)
             : { text: "Unknown read time" };
 
           return (
-            <Link key={blog._id} href={`/blog/${blog.slug.current}`} passHref>
+            <div>
               <div className="border-b-theme-charcolBlue30 border-b border-solid pb-[56px] cursor-pointer transition duration-200">
-                <div className="flex items-center gap-2 text-theme-charcolBlue font-regular text-sm sm:text-base lg:text-lg opacity-70 !leading-[20px]">
+                <div className="flex items-center gap-3 text-theme-charcolBlue font-regular text-sm sm:text-base lg:text-lg opacity-70 !leading-[20px]">
                   <span>
                     {new Date(blog.publishedAt).toLocaleDateString("en-US", {
                       month: "long",
@@ -46,25 +46,26 @@ export default async function LatestBlogs() {
                   <span>-</span>
                   <span>{stats.text}</span>
                 </div>
+                <Link key={blog._id} href={`/blog/${blog.slug.current}`} passHref>
+                  <div className="flex items-center justify-between w-full gap-4">
+                    <h2 className="text-theme-darkBrown text-2xl font-dm font-semibold hover:opacity-50 flex-1">
+                      {blog.title}
+                    </h2>
 
-                <div className="flex flex-col-reverse xs:grid xs:grid-cols-[auto_52px] items-start xs:items-center gap-6 w-full justify-between">
-                  <h2 className="text-theme-darkBrown text-2xl font-dm font-semibold hover:opacity-50">
-                    {blog.title}
-                  </h2>
-                  <div>
                     {blog.mainImage?.asset?.url && (
                       <Image
                         src={blog.mainImage.asset.url}
                         alt={String(blog.title)}
                         width={52}
                         height={52}
-                        className="rounded-lg"
+                        className="rounded-lg object-cover w-[52px] h-[52px] shadow-md"
                       />
                     )}
                   </div>
-                </div>
 
-                <div className="flex items-center gap-[12px] md:gap-[15px] mt-2">
+
+                </Link>
+                <div className="flex items-center gap-[14px] md:gap-[15px] mt-2">
                   {blog.author?.image?.asset?.url && (
                     <Image
                       src={blog.author.image.asset.url}
@@ -79,10 +80,24 @@ export default async function LatestBlogs() {
                   </span>
                 </div>
               </div>
-            </Link>
+
+              {/* <div>
+                    {blog.mainImage?.asset?.url && (
+                      <Image
+                        src={blog.mainImage.asset.url}
+                        alt={String(blog.title)}
+                        width={52}
+                        height={52}
+                        className="rounded-lg"
+                      />
+                    )}
+                  </div> */}
+
+            </div>
           );
         })}
       </div>
+
     </section>
   );
 }

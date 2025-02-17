@@ -92,7 +92,7 @@ function ContactButton() {
   return (
     <Link
       href="/contact_us"
-      className="text-black text-base font-semibold bg-green-500 px-8 py-[10px] md:px-10 md:py-[12px] rounded-full inline-flex items-center justify-center border-2 border-transparent hover:bg-transparent hover:border-green-500 hover:text-green-500 transition-all duration-200"
+      className="text-black text-base font-semibold bg-[#65ed75] px-8 py-[10px] md:px-10 md:py-[12px] rounded-full inline-flex items-center justify-center border-2 border-transparent hover:bg-transparent hover:border-green-500 hover:text-green-500 transition-all duration-200"
     >
       Contact
     </Link>
