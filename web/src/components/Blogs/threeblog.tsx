@@ -1,8 +1,24 @@
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
-import { getBlogs } from "../../../lib/sanity/queries/blogQueries";
+// components/Blogs/threeblog.tsx
 import Image from "next/image";
 import Link from "next/link";
 import readingTime from "reading-time";
+
+interface Blog {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  mainImage?: { asset?: { url: string } };
+  publishedAt?: string;
+  body?: any;
+  author?: {
+    name: string;
+    image?: { asset?: { url: string } };
+  };
+}
+
+interface ThreeBlogsProps {
+  blogs: Blog[];
+}
 
 function toPlainText(blocks: any): string {
   if (!blocks || !Array.isArray(blocks)) return "";
@@ -14,10 +30,8 @@ function toPlainText(blocks: any): string {
     .join("\n\n");
 }
 
-export default async function LatestBlogs() {
-  const blogs = await getBlogs();
-
-  const firstBlogs = blogs.slice(0, 3);
+const ThreeBlogs: React.FC<ThreeBlogsProps> = ({ blogs }) => {
+  if (!blogs || blogs.length === 0) return <p>No blogs available.</p>;
 
   return (
     <section className="max-w-3xl mx-auto px-6 py-8">
@@ -25,15 +39,14 @@ export default async function LatestBlogs() {
         Latest Blogs
       </h2>
       <div className="space-y-[56px]">
-        {firstBlogs.map((blog: any) => {
-
+        {blogs.map((blog) => {
           const plainText = blog.body ? toPlainText(blog.body) : "";
           const stats = plainText
             ? readingTime(plainText)
             : { text: "Unknown read time" };
 
           return (
-            <div>
+            <div key={blog._id}>
               <div className="border-b-theme-charcolBlue30 border-b border-solid pb-[56px] cursor-pointer transition duration-200">
                 <div className="flex items-center gap-3 text-theme-charcolBlue font-regular text-sm sm:text-base lg:text-lg opacity-70 !leading-[20px]">
                   <span>
@@ -46,12 +59,11 @@ export default async function LatestBlogs() {
                   <span>-</span>
                   <span>{stats.text}</span>
                 </div>
-                <Link key={blog._id} href={`/blog/${blog.slug.current}`} passHref>
+                <Link href={`/blog/${blog.slug.current}`} passHref>
                   <div className="flex items-center justify-between w-full gap-4">
                     <h2 className="text-theme-darkBrown text-2xl font-dm font-semibold hover:opacity-50 flex-1">
                       {blog.title}
                     </h2>
-
                     {blog.mainImage?.asset?.url && (
                       <Image
                         src={blog.mainImage.asset.url}
@@ -62,8 +74,6 @@ export default async function LatestBlogs() {
                       />
                     )}
                   </div>
-
-
                 </Link>
                 <div className="flex items-center gap-[14px] md:gap-[15px] mt-2">
                   {blog.author?.image?.asset?.url && (
@@ -80,24 +90,12 @@ export default async function LatestBlogs() {
                   </span>
                 </div>
               </div>
-
-              {/* <div>
-                    {blog.mainImage?.asset?.url && (
-                      <Image
-                        src={blog.mainImage.asset.url}
-                        alt={String(blog.title)}
-                        width={52}
-                        height={52}
-                        className="rounded-lg"
-                      />
-                    )}
-                  </div> */}
-
             </div>
           );
         })}
       </div>
-
     </section>
   );
-}
+};
+
+export default ThreeBlogs;

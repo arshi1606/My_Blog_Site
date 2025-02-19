@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { getFooter } from "../../../lib/sanity/queries/footerQueries";
 import { ArrowUp } from "lucide-react";
@@ -26,12 +24,7 @@ const GreenDot = () => (
   <span className="rounded-full text-[#65ed75] text-3xl mx-4">•</span>
 );
 
-const scrollToTop = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
-};
+
 
 const Footer = async () => {
   const footer: FooterType = await getFooter();
@@ -50,10 +43,6 @@ const Footer = async () => {
               </div>
               <div className="mt-8 w-full max-w-md mx-auto">
                 <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    console.log("Newsletter subscription submitted");
-                  }}
                   className="relative flex flex-col sm:flex-row items-center gap-4 sm:gap-2"
                 >
                   <div className="w-full">
@@ -112,7 +101,6 @@ const Footer = async () => {
 
         <div className="absolute right-4 xs:right-6 sm:right-8 bottom-6 md:bottom-8 cursor-pointer">
           <button
-            onClick={scrollToTop}
             className="text-black text-base font-semibold bg-[#65ed75] px-8 py-[10px] md:px-10 md:py-[12px] rounded-full inline-flex items-center justify-center border border-transparent hover:bg-transparent hover:border-green-500 hover:text-green-500 transition-all duration-200"
           >
             <ArrowUp className="w-5 h-5" />

@@ -17,7 +17,6 @@ interface Category {
 
 export default async function CategoriesPage() {
   const categories: Category[] = await getCategoriesWithBlogs();
-
   return (
     <section className="pt-[180px] md:pt-[190px] lg:pt-[220px]">
    

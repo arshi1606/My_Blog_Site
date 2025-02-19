@@ -1,10 +1,21 @@
+// components/Blogs/Blogs_Navbar.tsx
 "use client";
-import React, { useState } from "react";
 
-const BlogNavbar: React.FC = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [activeTab, setActiveTab] = useState("all");
+import React from "react";
 
+interface BlogNavbarProps {
+  activeTab: "all" | "latest" | "popular";
+  setActiveTab: (tab: "all" | "latest" | "popular") => void;
+  searchTerm: string;
+  setSearchTerm: (value: string) => void;
+}
+
+const BlogNavbar: React.FC<BlogNavbarProps> = ({
+  activeTab,
+  setActiveTab,
+  searchTerm,
+  setSearchTerm,
+}) => {
   return (
     <div className="flex items-start lg:items-center flex-col lg:flex-row gap-8 justify-between mb-16 overflow-hidden">
       <div className="flex gap-4 whitespace-nowrap overflow-x-auto w-full">
@@ -15,9 +26,8 @@ const BlogNavbar: React.FC = () => {
               ? "bg-green-500 hover:bg-green-600"
               : "bg-gray-100 hover:bg-gray-200"
           }`}
-         
         >
-          All Blogs 
+          All Blogs
         </button>
         <button
           onClick={() => setActiveTab("latest")}
@@ -71,4 +81,3 @@ const BlogNavbar: React.FC = () => {
 };
 
 export default BlogNavbar;
-

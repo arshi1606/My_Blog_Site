@@ -1,7 +1,7 @@
 import React from "react";
 import { getPrivacyPolicy } from "../../../lib/sanity/queries/privacypolicyQueries";
 import { PortableText } from "@portabletext/react";
-
+import { portableTextComponents } from "@/components/portabletext";
 export default async function PrivacyPolicyPage() {
   const privacyPolicy = await getPrivacyPolicy();
 
