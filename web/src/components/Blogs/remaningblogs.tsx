@@ -1,4 +1,3 @@
-// components/Blogs/remaningblogs.tsx
 import Image from "next/image";
 import Link from "next/link";
 import readingTime from "reading-time";

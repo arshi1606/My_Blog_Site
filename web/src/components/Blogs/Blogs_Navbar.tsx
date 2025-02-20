@@ -1,4 +1,3 @@
-// components/Blogs/Blogs_Navbar.tsx
 "use client";
 
 import React from "react";

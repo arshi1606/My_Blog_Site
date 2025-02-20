@@ -27,19 +27,14 @@ export async function getBlogBySlugHeading(slug: string) {
 }
 
 
-
-
-
 export async function getBlogs(searchTerm: string = "") {
-  // if a search term exists, filter by title or body text (using wildcards)
-  const searchFilter = searchTerm
-    ? ` && (title match "*${searchTerm}*" || body[].children[].text match "*${searchTerm}*")`
-    : "";
+
+  const searchFilter = searchTerm ? ` && title match "*${searchTerm}*"` : "";
   const query = `*[_type == "blog"${searchFilter}]{
     _id,
     title,
     slug,
-    mainImage {
+    mainImage { 
       asset->{
         url
       }
@@ -56,18 +51,15 @@ export async function getBlogs(searchTerm: string = "") {
       }
     }
   }`;
-  return await client.fetch(query);
-}
+  return await client.fetch(query)}
 
 export async function getLatestBlogs(searchTerm: string = "") {
-  const searchFilter = searchTerm
-    ? ` && (title match "*${searchTerm}*" || body[].children[].text match "*${searchTerm}*")`
-    : "";
+  const searchFilter = searchTerm ? ` && title match "*${searchTerm}*"` : "";
   const query = `*[_type == "blog"${searchFilter}] | order(publishedAt desc) {
     _id,
     title,
     slug,
-    mainImage {
+    mainImage { 
       asset->{
         url
       }
@@ -88,14 +80,12 @@ export async function getLatestBlogs(searchTerm: string = "") {
 }
 
 export async function getPopularBlogs(searchTerm: string = "") {
-  const searchFilter = searchTerm
-    ? ` && (title match "*${searchTerm}*" || body[].children[].text match "*${searchTerm}*")`
-    : "";
+  const searchFilter = searchTerm ? ` && title match "*${searchTerm}*"` : "";
   const query = `*[_type == "blog"${searchFilter}] | order(views desc) {
     _id,
     title,
     slug,
-    mainImage {
+    mainImage { 
       asset->{
         url
       }

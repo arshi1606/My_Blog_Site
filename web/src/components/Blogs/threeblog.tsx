@@ -1,4 +1,3 @@
-// components/Blogs/threeblog.tsx
 import Image from "next/image";
 import Link from "next/link";
 import readingTime from "reading-time";
@@ -50,11 +49,13 @@ const ThreeBlogs: React.FC<ThreeBlogsProps> = ({ blogs }) => {
               <div className="border-b-theme-charcolBlue30 border-b border-solid pb-[56px] cursor-pointer transition duration-200">
                 <div className="flex items-center gap-3 text-theme-charcolBlue font-regular text-sm sm:text-base lg:text-lg opacity-70 !leading-[20px]">
                   <span>
-                    {new Date(blog.publishedAt).toLocaleDateString("en-US", {
-                      month: "long",
-                      day: "numeric",
-                      year: "numeric",
-                    })}
+                    {blog.publishedAt
+                      ? new Date(blog.publishedAt).toLocaleDateString("en-US", {
+                          month: "long",
+                          day: "numeric",
+                          year: "numeric",
+                        })
+                      : "Unknown Date"}
                   </span>
                   <span>-</span>
                   <span>{stats.text}</span>
